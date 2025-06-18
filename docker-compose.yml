@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  auth:
+    build: .
+    container_name: auth_server
+    command: uvicorn auth_server:app --host 0.0.0.0 --port 8002
+    ports:
+      - "8002:8002"
+    env_file:
+      - .env
+
+  buyer:
+    build: .
+    container_name: buyer_server
+    command: uvicorn buyer_server:app --host 0.0.0.0 --port 8001
+    ports:
+      - "8001:8001"
+    env_file:
+      - .env
+
+  seller:
+    build: .
+    container_name: seller_server
+    command: uvicorn seller_server:app --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
